@@ -1,9 +1,21 @@
 (function () {
 
-    var setSphereJumping = function (sphere, time) {
-        setInterval(function () {
+    var getJumpInterval = (function () {
+        var multi = 25,
+            time = 1;
+
+        return function () {
+            console.log(time);
+            return time = (multi + time) % (8 * multi) + multi;
+        };
+    })();
+
+    var setSphereJumping = function (sphere) {
+        var jump = function () {
             sphere.position.y = sphere.position.y % 3 + 1;
-        }, time)
+            setTimeout(jump, getJumpInterval());
+        };
+        jump();
     };
 
     var createSphereMatrix = function (scene, size) {
@@ -17,7 +29,7 @@
                 sphere.position.x = x * 6;
                 sphere.position.z = z * 6;
 
-                setSphereJumping(sphere, ((x + z) % size) * 250);
+                setSphereJumping(sphere);
             }
         }
     };
