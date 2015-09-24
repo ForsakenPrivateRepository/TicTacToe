@@ -1,5 +1,11 @@
 (function () {
 
+    var setSphereJumping = function (sphere, time) {
+        setInterval(function () {
+            sphere.position.y = sphere.position.y % 3 + 1;
+        }, time)
+    };
+
     var createSphereMatrix = function (scene, size) {
         for (var x = 0; x < 3; ++x) {
             for (var z = 0; z < 3; ++z) {
@@ -10,6 +16,8 @@
                 sphere.position.y = 1;
                 sphere.position.x = x * 6;
                 sphere.position.z = z * 6;
+
+                setSphereJumping(sphere, ((x + z) % size) * 250);
             }
         }
     };
@@ -27,7 +35,7 @@
             var scene = new BABYLON.Scene(engine);
 
             // create a FreeCamera, and set its position to (x:0, y:5, z:-10)
-            var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 50,-10), scene);
+            var camera = new BABYLON.FreeCamera('camera1', new BABYLON.Vector3(0, 20,-10), scene);
 
             // target the camera to scene origin
             camera.setTarget(BABYLON.Vector3.Zero());
