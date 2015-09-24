@@ -7,7 +7,7 @@
         var engine = new BABYLON.Engine(canvas, true);
 
         // createScene function that creates and return the scene
-        var createScene = function(){
+        var createScene = function() {
             // create a basic BJS Scene object
             var scene = new BABYLON.Scene(engine);
 
@@ -28,6 +28,10 @@
 
             // move the sphere upward 1/2 of its height
             sphere.position.y = 1;
+
+            setInterval(function () {
+                sphere.position.y = sphere.position.y % 2 + 1;
+            }, 250);
 
             // create a built-in "ground" shape; its constructor takes the same 5 params as the sphere's one
             var ground = new BABYLON.Mesh.CreateGround('ground1', 6, 6, 2, scene);
