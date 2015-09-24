@@ -5,7 +5,6 @@
             time = 1;
 
         return function () {
-            console.log(time);
             return time = (multi + time) % (8 * multi) + multi;
         };
     })();
@@ -19,10 +18,15 @@
     };
 
     var createSphereMatrix = function (scene, size) {
+        var materialSphere = new BABYLON.StandardMaterial('texture1', scene);
+        materialSphere.diffuseColor = new BABYLON.Color3(1.0, 0.2, 0.3);
+
         for (var x = 0; x < 3; ++x) {
             for (var z = 0; z < 3; ++z) {
                 // create a built-in "sphere" shape; its constructor takes 5 params: name, width, depth, subdivisions, scene
                 var sphere = new BABYLON.Mesh.CreateSphere('sphere' + x + z, 16, 2, scene);
+
+                sphere.material = materialSphere;
 
                 // move the sphere upward 1/2 of its height
                 sphere.position.y = 1;
