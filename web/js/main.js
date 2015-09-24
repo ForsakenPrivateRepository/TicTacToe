@@ -38,6 +38,15 @@
         }
     };
 
+    var createLightSphere = function (scene) {
+        // create a basic light, aiming 0,1,0 - meaning, to the sky
+        for (var i = -15; i < 30; i+= 15) {
+            var light = new BABYLON.PointLight("Omni", new BABYLON.Vector3(i, 5, i), scene);
+            light.diffuse = new BABYLON.Color3(1, 1, 1);
+            light.specular = new BABYLON.Color3(1, 1, 1);
+        }
+    };
+
     window.addEventListener('DOMContentLoaded', function(){
         // get the canvas DOM element
         var canvas = document.getElementById('renderCanvas');
@@ -59,8 +68,7 @@
             // attach the camera to the canvas
             camera.attachControl(canvas, false);
 
-            // create a basic light, aiming 0,1,0 - meaning, to the sky
-            var light = new BABYLON.HemisphericLight('light1', new BABYLON.Vector3(0,1,0), scene);
+            createLightSphere(scene);
 
             createSphereMatrix(scene, 3);
 
